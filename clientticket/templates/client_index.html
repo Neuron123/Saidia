@@ -5,5 +5,24 @@
 
  
 
-<a href="/accounts/logout">Logout</a>
+<div>
+    {% if user.is_authenticated %}
+    	<a href="{% url 'create_ticket' %}">Create ticket</a>
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'password_change' %}">Change password</a>
+
+
+        <div>
+        	{% for ticket in ticket_list %}
+        	<fieldset>
+        		<h5>{{ ticket.ticket_title }}</h5>
+        		<p>{{ ticket.ticket_content }}</p>
+        	</fieldset>
+        	{% endfor %}
+        </div>
+
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
 {% endblock %}
